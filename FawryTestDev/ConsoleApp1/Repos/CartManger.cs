@@ -2,15 +2,18 @@
 using ConsoleApp1.InterFaces;
 using ConsoleApp1.InterFaces.IProductDir;
 using ConsoleApp1.Models;
+using ConsoleApp1.Models.ProductDir;
 
 namespace ConsoleApp1.Repos
 {
     public class CartManger : ICartManger
     {
         IProductManger _productManger;
-        public CartManger(IProductManger productManger)
+        IProductFactory _productFactory;
+        public CartManger(IProductManger productManger, IProductFactory productFactory)
         {
             _productManger = productManger;
+            _productFactory = productFactory;
         }
         public string DisplayCart(Cart cart)
         {
@@ -40,8 +43,8 @@ namespace ConsoleApp1.Repos
                     if ((user.Balance >= (double)(quantity*product.Price)))
                     {
                         user.Balance -= (double)(quantity * product.Price);
-                        var addedProduct = product;
-                        addedProduct.Quantity = quantity; // Set the quantity for the cart
+                        var addedProduct = _productFactory.CreateCopyWithQuantity(product, quantity);
+                        addedProduct.Quantity = quantity; 
                         user.Cart.Products.Add(addedProduct);
                         _productManger.DecreaseQuantity(product.Id, quantity);
                         return ($"{product.Name} Added successfully to your cart");
