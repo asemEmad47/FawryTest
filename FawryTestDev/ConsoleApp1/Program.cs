@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1.DataBase;
 using ConsoleApp1.InterFaces.IProductDir;
 using ConsoleApp1.Models;
+using ConsoleApp1.Models.ProductDir;
 using ConsoleApp1.Repos;
 
 namespace ConsoleApp1
@@ -19,8 +20,9 @@ namespace ConsoleApp1
 
             ProductManger productManger = new ProductManger();
             BaseRepo<IProduct> productRepo = new BaseRepo<IProduct>(DB.Products);
+            ProductFactory productFactory = new ProductFactory();
 
-            CartManger cartManager = new CartManger(productManger);
+            CartManger cartManager = new CartManger(productManger , productFactory);
 
             CheckOutManger checkoutManager = new CheckOutManger(cartManager);
             Console.WriteLine("Welcome to our app!");
