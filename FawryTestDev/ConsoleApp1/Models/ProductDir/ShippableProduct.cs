@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1.Models.ProductDir
 {
-    class ShippableProduct:IProduct , IShippable
+    public class ShippableProduct:IProduct , IShippable
     {
         public int Id { get; set; }
         public string Name { get; set; }
