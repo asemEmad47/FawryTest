@@ -31,7 +31,7 @@ namespace ConsoleApp1.Repos
             Console.WriteLine($"\n ** Checkout receipt **");
             cart.Products.ForEach(product =>
             {
-                Console.WriteLine($"{product.Quantity}X {product.Name} : {product.Price * product.Quantity}g ");
+                Console.WriteLine($"{product.Quantity}X {product.Name} : {product.Price * product.Quantity} EGP");
             });
 
             Console.WriteLine("------------------------------------");
